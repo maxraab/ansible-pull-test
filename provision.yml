@@ -1,0 +1,26 @@
+---
+  - hosts: all
+    become: true
+    gather_facts: false
+    tasks:
+      - name: "Install basic software"
+        apt:
+          package:
+            - htop
+            - finger
+          state: present
+
+  - hosts: webserver
+    become: true
+    gather_facts: false
+    tasks:
+      - name: "Create webserver config"
+        command: "echo 'this is a webserver' > /root/webserver"
+
+  - hosts: dbserver
+    become: true
+    gather_facts: false
+    tasks:
+      - name: "Create webserver config"
+        command: "echo 'this is a dbserver' > /root/webserver"
+  
