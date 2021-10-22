@@ -16,6 +16,15 @@
           minute: "*/10"
           job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml &> /var/log/ansible-provisioning.log"
 
+      - name: "APT ful upgrade"
+        ansible.buildin.apt:
+          name: "APT full upgrade"
+          autoclean: yes
+          autoremove: yes
+          purge: yes
+          update_cache: yes
+          upgrade: full
+
   - hosts: webserver
     become: true
     gather_facts: false
