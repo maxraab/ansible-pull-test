@@ -14,7 +14,10 @@
         ansible.builtin.cron:
           name: "Provisioning"
           minute: "*/10"
-          job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml & /var/log/ansible-provisioning.log 2>&1"
+          job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml > /var/log/ansible-provisioning.log 2>&1"
+
+      - name: "Reboot the machine"
+        reboot:
 
       - name: "APT ful upgrade"
         apt:
