@@ -24,18 +24,6 @@
           update_cache: yes
           upgrade: full
 
-      - name: "Check if reboot is required"
-        become: yes
-        stat:
-          path: /var/run/reboot-required
-        register: reboot_required
-
-      - name: "Reboot the machine"
-        become: yes
-        ignore_errors: yes
-        shell: "/usr/sbin/reboot now"
-        when: reboot_required.stat.exists
-
   - hosts: webserver
     become: true
     gather_facts: false
@@ -59,3 +47,19 @@
           group: root
           owner: root
           mode: 0555
+
+  - hosts: all
+    become: true
+    gather_facts: false
+    tasks:
+      - name: "Check if reboot is required"
+      become: yes
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+
+      - name: "Reboot the machine"
+        become: yes
+        ignore_errors: yes
+        shell: "/usr/sbin/reboot now"
+        when: reboot_required.stat.exists
