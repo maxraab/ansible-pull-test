@@ -15,12 +15,12 @@
     gather_facts: false
     tasks:
       - name: "Create webserver config"
-        command: "echo 'this is a webserver' > /root/webserver"
+        command: "echo this is a webserver > /root/webserver"
 
   - hosts: dbserver
     become: true
     gather_facts: false
     tasks:
       - name: "Create webserver config"
-        command: "echo 'this is a dbserver' > /root/webserver"
+        command: "echo this is a dbserver > /root/webserver"
   
