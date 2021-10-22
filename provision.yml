@@ -11,9 +11,9 @@
           state: present
 
       - name: "Install provisioning cronjob"
-        ansible.builtin.cron:
+        cron:
           name: "Provisioning"
-          minute: "*/10"
+          hour: "*"
           job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml > /var/log/ansible-provisioning.log 2>&1"
 
       - name: "APT full upgrade"
@@ -23,6 +23,15 @@
           purge: yes
           update_cache: yes
           upgrade: full
+
+      - name: "Copy heartbeat client deb"
+        copy:
+          src: heartbeat-client_0.1.0-1_all.deb
+          dest: /tmp/heartbeat-client_0.1.0-1_all.deb
+
+      - name: "Install heartbeat client"
+        apt:
+          deb: /tmp/heartbeat-client_0.1.0-1_all.deb
 
   - hosts: webserver
     become: true
