@@ -14,13 +14,23 @@
     become: true
     gather_facts: false
     tasks:
-      - name: "Create webserver config"
-        command: "echo this is a webserver > /root/webserver"
+      - name: "create webserver config"
+        copy:
+          content: "this is a webserver"
+          dest: /root/webserver.config
+          group: root
+          owner: root
+          mode: 0555
 
   - hosts: dbserver
     become: true
     gather_facts: false
     tasks:
-      - name: "Create webserver config"
-        command: "echo this is a dbserver > /root/webserver"
+      - name: "create database config"
+        copy:
+          content: "this is a database"
+          dest: /root/database.config
+          group: root
+          owner: root
+          mode: 0555
   
