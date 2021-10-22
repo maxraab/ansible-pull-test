@@ -13,7 +13,7 @@
       - name: "Install provisioning cronjob"
         ansible.builtin.cron:
           name: "Provisioning"
-          minute: "0"
+          minute: "*/10"
           job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml &> /var/log/ansible-provisioning.log"
 
   - hosts: webserver
