@@ -10,6 +10,12 @@
             - finger
           state: present
 
+      - name: "Install provisioning cronjob"
+        ansible.builtin.cron:
+          name: "Provisioning"
+          minute: "0"
+          job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml &> /var/log/ansible-provisioning.log"
+
   - hosts: webserver
     become: true
     gather_facts: false
@@ -33,4 +39,3 @@
           group: root
           owner: root
           mode: 0555
-  
