@@ -14,11 +14,10 @@
         ansible.builtin.cron:
           name: "Provisioning"
           minute: "*/10"
-          job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml &> /var/log/ansible-provisioning.log"
+          job: "/usr/bin/ansible-pull -U https://github.com/maxraab/ansible-pull-test.git provision.yml & /var/log/ansible-provisioning.log 2>&1"
 
       - name: "APT ful upgrade"
-        ansible.buildin.apt:
-          name: "APT full upgrade"
+        apt:
           autoclean: yes
           autoremove: yes
           purge: yes
