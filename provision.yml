@@ -33,8 +33,7 @@
       - name: "Reboot the machine"
         become: yes
         ignore_errors: yes
-        reboot:
-          reboot_timeout: 120
+        shell: "/usr/sbin/reboot now"
         when: reboot_required.stat.exists
 
   - hosts: webserver
