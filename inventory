@@ -1,7 +1,3 @@
-#[all]
-#ubuntu-web
-#ubuntu-db
-
 [webserver]
 ubuntu-web
 
